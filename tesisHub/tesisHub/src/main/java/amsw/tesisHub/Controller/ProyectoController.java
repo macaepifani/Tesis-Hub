@@ -1,12 +1,12 @@
 package amsw.tesisHub.Controller;
 
+import amsw.tesisHub.DTO.DTOProyectoCompleto;
 import amsw.tesisHub.DTO.DTOProyectoSimple;
 import amsw.tesisHub.Service.CUVisualizarProyectos;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +18,22 @@ public class ProyectoController {
     CUVisualizarProyectos visualizarProyectos;
 
     @GetMapping("/proyectos")
-    public List<DTOProyectoSimple> listarProyectos(){
-        return visualizarProyectos.obtenerProyectos();
+    public ResponseEntity<List<DTOProyectoSimple>> listarProyectosAprobados() {
+        try {
+            List<DTOProyectoSimple> proyectos = visualizarProyectos.obtenerProyectosAprobados();
+            return ResponseEntity.ok(proyectos);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @GetMapping("/proyectos/{id}")
+    public ResponseEntity<DTOProyectoCompleto> verProyecto(@PathVariable Long id) {
+        try {
+            DTOProyectoCompleto proyecto = visualizarProyectos.obtenerProyectoPorID(id);
+            return ResponseEntity.ok(proyecto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 }
