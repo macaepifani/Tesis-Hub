@@ -1,19 +1,42 @@
-const Home = () => {
-  return (
-    <div>
-      <h1>TesisHub</h1>
-      <p>Repositorio de tesis universitarias</p>
+import CardProyecto from "../components/CardProyecto";
 
-      <div>
-        <h3>Proyectos destacados</h3>
-        <ul>
-          <li>Proyecto 1</li>
-          <li>Proyecto 2</li>
-          <li>Proyecto 3</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
+const proyectosMock = [
+    {
+        id: 1,
+        titulo: "Sistema de Gestión Universitaria",
+        descripcion: "Plataforma para administrar alumnos, materias y docentes.",
+        categoria: "Educación",
+        autor: "Juan Pérez",
+    },
+    {
+        id: 2,
+        titulo: "App de Seguimiento de Hábitos",
+        descripcion: "Aplicación móvil para mejorar la productividad personal.",
+        categoria: "Salud",
+        autor: "María López",
+    },
+    {
+        id: 3,
+        titulo: "Marketplace Solidario",
+        descripcion: "Espacio para conectar emprendedores con impacto social.",
+        categoria: "Social",
+        autor: "Lucía Gómez",
+    },
+];
 
-export default Home;
+export default function Home() {
+    return (
+        <div className="home">
+            <h1>TesisHub</h1>
+
+            <div className="grid-proyectos">
+                {proyectosMock.map((proyecto) => (
+                    <CardProyecto
+                        key={proyecto.id}
+                        proyecto={proyecto}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
