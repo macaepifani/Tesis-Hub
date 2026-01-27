@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 //Lombok
 @Getter
@@ -24,4 +25,6 @@ public class Universidad  implements Serializable {
     @Column(name = "Nombre", nullable = false)
     private String nombreUniversidad;
 
+    @Column(name = "Fecha_Baja", nullable = true)
+    private LocalDateTime fechaHBajaUniversidad;
 }
